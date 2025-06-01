@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LapanganKu - Sistem Booking Lapangan</title>
     
-    <!-- CDN CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -22,7 +21,6 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-    <!-- Navbar dengan Tailwind dan Font Awesome -->
     <nav class="bg-indigo-600 text-white shadow-lg">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-4">
@@ -40,7 +38,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero-section flex-grow flex items-center">
         <div class="container mx-auto px-6 py-16 text-center">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 animate-bounce">
@@ -101,7 +98,7 @@
                     </div>
                     <p class="mt-2 text-gray-400">Solusi booking lapangan olahraga terbaik.</p>
                 </div>
-                <div class="flex space-x-6">
+                <!-- <div class="flex space-x-6">
                     <a href="#" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-facebook-f"></i>
                     </a>
@@ -111,7 +108,7 @@
                     <a href="#" class="text-gray-400 hover:text-white transition">
                         <i class="fab fa-instagram"></i>
                     </a>
-                </div>
+                </div> -->
             </div>
             <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
                 <p>&copy; {{ date('Y') }} LapanganKu. All rights reserved.</p>

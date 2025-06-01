@@ -22,7 +22,7 @@ class Payment extends Model
     // Relasi ke booking
     public function booking()
     {
-        return $this->belongsTo(Booking::class);
+        return $this->belongsTo(Booking::class, 'booking_id');
     }
 
 }

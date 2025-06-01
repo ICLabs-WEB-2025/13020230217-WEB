@@ -3,8 +3,9 @@
 @section('title', 'Dashboard Pengguna')
 
 @section('content')
+{{-- Tidak perlu lagi use Illuminate\Support\Facades\Storage; di sini karena sudah ditangani oleh akseksori di model --}}
+
 <div class="container py-4">
-    <!-- Filter Lapangan -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
             <h4 class="mb-0"><i class="fas fa-filter me-2"></i>Filter Lapangan</h4>
@@ -31,7 +32,6 @@
         </div>
     </div>
 
-    <!-- Daftar Lapangan Tersedia -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-success text-white">
             <h4 class="mb-0"><i class="fas fa-list me-2"></i>Lapangan Tersedia</h4>
@@ -41,7 +41,7 @@
                 @forelse ($fields as $field)
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
-                        <div class="card-img-top bg-secondary" style="height: 180px; background-image: url('{{ $field->photo ? asset('storage/' . $field->photo) : asset('images/default-field.jpg') }}'); background-size: cover; background-position: center;">
+                        <div class="card-img-top" style="height: 180px; background-image: url('{{ asset('images/default-field.jpg') }}'); background-size: cover; background-position: center;">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $field->name }}</h5>
@@ -50,7 +50,7 @@
                                 <span class="badge bg-success">Rp {{ number_format($field->price_per_hour, 0, ',', '.') }}/jam</span>
                             </p>
                             <p class="card-text">{{ Illuminate\Support\Str::limit($field->description, 100) }}</p>
-                             <a href="{{ route('user.schedule', $field->id) }}" class="btn btn-primary w-100">Lihat Jadwal</a>
+                            <a href="{{ route('user.schedule.show', $field->id) }}" class="btn btn-primary w-100">Lihat Jadwal</a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,6 @@
         </div>
     </div>
 
-    <!-- Riwayat Booking -->
     <div class="card shadow-sm">
         <div class="card-header bg-warning">
             <h4 class="mb-0"><i class="fas fa-history me-2"></i>Riwayat Booking Anda</h4>
@@ -117,13 +116,13 @@
                             </td>
                             <td>
                                 @if(!$booking->payment || $booking->payment->status != 'success')
-                                    <a href="{{ route('user.payment.show', $booking) }}" 
+                                    <a href="{{ route('user.payment.show', $booking) }}"
                                        class="btn btn-sm btn-success"
                                        title="Lanjutkan Pembayaran">
                                        <i class="fas fa-money-bill-wave"></i>
                                     </a>
                                 @endif
-                                <a href="{{ route('user.book.download', $booking) }}" 
+                                <a href="{{ route('user.book.download', $booking) }}"
                                    class="btn btn-sm btn-primary"
                                    title="Cetak Invoice">
                                    <i class="fas fa-print"></i>
@@ -142,4 +141,3 @@
     </div>
 </div>
 @endsection
-

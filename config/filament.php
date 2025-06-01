@@ -98,36 +98,4 @@ return [
 
     'system_route_prefix' => 'filament',
 
-    // 'default' => env('FILAMENT_ADMIN_PANEL', 'admin'),
-    
-    'default' => 'user',
-    
-    'panels' => [
-        'admin' => [
-            'path' => 'admin',
-            'provider' => App\Providers\Filament\AdminPanelProvider::class,
-        ],
-        'user' => [
-            'path' => 'dashboard',
-            'provider' => App\Providers\Filament\UserPanelProvider::class,
-        ],
-    ],
-
-    
-    'default' => 'admin',
-    
-    'panels' => [
-        'admin' => [
-            'path' => 'admin',
-            'domain' => env('FILAMENT_DOMAIN'),
-            'auth' => [
-                'guard' => 'web',
-                'pages' => [
-                    'login' => \Filament\Pages\Auth\Login::class,
-                ],
-            ],
-        ],
-    ],
-
-
 ];

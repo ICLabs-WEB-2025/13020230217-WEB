@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('booking_id')->constrained();
+            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
             $table->string('method'); // bank_transfer, e_wallet, etc
             $table->string('status'); // pending, success, failed
             $table->decimal('amount', 10, 2);

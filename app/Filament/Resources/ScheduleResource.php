@@ -9,6 +9,8 @@
    use Filament\Tables;
    use Filament\Forms\Form;
    use Filament\Tables\Table;
+   use Illuminate\Database\Eloquent\Builder; // Tambahkan baris ini jika belum ada
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
    class ScheduleResource extends Resource
    {
@@ -47,7 +49,8 @@
        public static function table(Table $table): Table
        {
            return $table
-               ->columns([
+           ->query(Schedule::query()->withoutGlobalScope(SoftDeletingScope::class))    
+           ->columns([
                    Tables\Columns\TextColumn::make('field.name')->label('Lapangan'),
                    Tables\Columns\TextColumn::make('date')->label('Tanggal'),
                    Tables\Columns\TextColumn::make('start_time')->label('Waktu Mulai'),

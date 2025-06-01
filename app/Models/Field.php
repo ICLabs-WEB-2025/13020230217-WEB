@@ -3,132 +3,53 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Facades\Storage;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Support\Facades\Storage; // Tambahkan baris ini
 
-class Field extends Model
+class Field extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     protected $fillable = [
-        'name', 
-        'sport_type', 
-        'price_per_hour', 
-        'description', 
-        'photo', 
-        'is_active',
+       'name', 'sport_type', 'price_per_hour', 'description', 'photo', 'is_active',
     ];
 
-    protected $casts = [
-        'is_active' => 'boolean',
-        'price_per_hour' => 'decimal:2',
-    ];
-
+    // Jika Anda masih memiliki protected $appends = ['photo_url']; tambahkan ini juga
     protected $appends = ['photo_url'];
 
-    /**
-     * Get the schedules for the field.
-     */
-    public function schedules(): HasMany
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('photos')
+             ->singleFile()
+             ->acceptsMimeTypes(['image/jpeg', 'image/png', 'image/webp']);
+    }
+
+    public function schedules()
     {
         return $this->hasMany(Schedule::class);
     }
 
-    /**
-     * Get the bookings for the field.
-     */
-    public function bookings(): HasMany
+    public function bookings()
     {
         return $this->hasMany(Booking::class);
     }
 
-    /**
-     * Get the active fields.
-     */
-    public function scopeActive($query)
+    
+    public function images()
     {
-        return $query->where('is_active', true);
+        return $this->hasMany(FieldImage::class);
     }
 
-    /**
-     * Get fields by sport type.
-     */
-    public function scopeOfType($query, $type)
+    public function getPhotoUrlAttribute()
     {
-        return $query->where('sport_type', $type);
-    }
+        if (!$this->photo) {
+            return asset('images/default-field.jpg');
+        }
 
-    /**
-     * Get the formatted price attribute.
-     */
-    protected function formattedPrice(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => 'Rp ' . number_format($this->price_per_hour, 0, ',', '.'),
-        );
-    }
-
-    /**
-     * Get the full photo URL.
-     */
-    protected function photoUrl(): Attribute
-    {
-        return Attribute::make(
-            get: function () {
-                if (!$this->photo) {
-                    return asset('images/default-field.jpg');
-                }
-                
-                return str_starts_with($this->photo, 'http') 
-                    ? $this->photo 
-                    : Storage::url($this->photo);
-            }
-        );
-    }
-
-    /**
-     * Get the available hours for booking.
-     */
-    public function availableHours($date)
-    {
-        $bookedHours = $this->bookings()
-            ->whereDate('date', $date)
-            ->pluck('start_time', 'end_time');
-            
-        // Implement your availability logic here
-        return [];
+        // Perbaiki 'storage' menjadi 'Storage'
+        return str_starts_with($this->photo, 'http')
+            ? $this->photo
+            : Storage::url($this->photo); // Perbaikan di sini
     }
 }
-
-//    namespace App\Models;
-
-//    use Illuminate\Database\Eloquent\Model;
-//    use Illuminate\Database\Eloquent\Relations\HasMany;
-
-//    class Field extends Model
-//    {
-//        protected $fillable = [
-//            'name', 'sport_type', 'price_per_hour', 'description', 'photo', 'is_active',
-//        ];
-
-//        protected $casts = [
-//             'is_active' => 'boolean',
-//             'price_per_hour' => 'decimal:2',
-//         ];
-
-//         protected $appends = ['photo_url'];
-
-//        public function schedules()
-//        {
-//            return $this->hasMany(Schedule::class);
-//        }
-
-//        public function bookings()
-//        {
-//            return $this->hasMany(Booking::class);
-//        }
-
-//        public function images(): HasMany
-//         {
-//             return $this->hasMany(FieldImage::class);
-//         }
-//    }

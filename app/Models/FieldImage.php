@@ -79,7 +79,6 @@ class FieldImage extends Model
         static::deleted(function ($image) {
             Storage::disk('public')->delete($image->path);
             
-            // Delete thumbnail if exists
             $pathParts = pathinfo($image->path);
             $thumbnailPath = $pathParts['dirname'].'/thumbs/'.$pathParts['filename'].'.'.$pathParts['extension'];
             

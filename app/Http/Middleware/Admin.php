@@ -15,6 +15,6 @@
                return $next($request);
            }
            Log::info('Non-admin attempted admin access: ' . Auth::user()->email);
-           return redirect()->route('user.dashboard')->with('error', 'Akses ditolak. Hanya admin yang diizinkan.');
+           return redirect()->route('user.dashboard');
        }
    }

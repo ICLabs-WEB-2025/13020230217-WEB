@@ -29,7 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Indigo,
+                'primary' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -39,7 +39,9 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                FieldsOverview::class,
+                ScheduleOverview::class,
+                FieldsList::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -54,44 +56,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->userMenuItems([
-                MenuItem::make()
-                    ->label('Dashboard User')
-                    ->url('/dashboard')
-                    ->icon('heroicon-o-user'),
-                MenuItem::make()
-                    ->label('Website')
-                    ->url('/')
-                    ->icon('heroicon-o-home'),
+                \App\Http\Middleware\Admin::class
             ]);
     }
 }
-
-// namespace App\Providers\Filament;
-// use Filament\Http\Middleware\Authenticate;
-// use Filament\Panel;
-// use Filament\PanelProvider;
-// use Illuminate\Session\Middleware\StartSession;
-
-// class AdminPanelProvider extends PanelProvider
-// {
-//     public function panel(Panel $panel): Panel
-//     {
-//         return $panel
-//             ->default()
-//             ->id('admin')
-//             ->path('admin')
-//             ->login()
-//             ->colors([
-//                 'primary' => '#6366f1',
-//             ])
-//             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-//             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-//             ->pages([])
-//             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-//             ->widgets([])
-//             ->middleware([StartSession::class])
-//             ->authMiddleware([Authenticate::class]);
-//     }
-// }
