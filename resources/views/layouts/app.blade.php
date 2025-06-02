@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<!-- <html lang="id">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LapanganKu - @yield('title')</title>
-    
-    <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome 6 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts - Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -57,7 +51,7 @@
                     @auth
                         @if (Auth::user()->isAdmin())
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                                <a class="nav-link" href="{{ route('dashboard') }}">
                                     <i class="fas fa-tachometer-alt me-1"></i>Dashboard Admin
                                 </a>
                             </li>
@@ -117,7 +111,7 @@
         @yield('content')
     </div>
 
-    <!-- Footer -->
+   
     <footer class="bg-light py-4 mt-5">
         <div class="container text-center">
             <p class="text-muted mb-0">
@@ -125,13 +119,10 @@
             </p>
         </div>
     </footer>
-
-    <!-- Bootstrap 5 JS Bundle with Popper CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Custom JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
     <script>
-        // Auto-dismiss alerts after 5 seconds
         document.addEventListener('DOMContentLoaded', function() {
             var alerts = document.querySelectorAll('.alert');
             alerts.forEach(function(alert) {

@@ -57,7 +57,6 @@
         </div>
     </section>
 
-    <!-- Fitur -->
     <section id="features" class="py-16 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Kenapa Memilih LapanganKu?</h2>
@@ -98,17 +97,6 @@
                     </div>
                     <p class="mt-2 text-gray-400">Solusi booking lapangan olahraga terbaik.</p>
                 </div>
-                <!-- <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div> -->
             </div>
             <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400">
                 <p>&copy; {{ date('Y') }} LapanganKu. All rights reserved.</p>
@@ -116,7 +104,6 @@
         </div>
     </footer>
 
-    <!-- CDN JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
 </body>
 </html>
